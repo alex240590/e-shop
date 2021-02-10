@@ -43,16 +43,16 @@ public class ShopController {
 
         Specification<Product> spec = Specification.where(null);
         StringBuilder filters = new StringBuilder();
-        if (word != null) {
-            spec = spec.and(ProductSpecs.titleContains(word));
-            filters.append("&word=" + word);
+        if (word.isPresent() && !word.get().isBlank()) {
+            spec = spec.and(ProductSpecs.titleContains(word.get()));
+            filters.append("&word=" + word.get());
         }
-        if (min != null) {
-            spec = spec.and(ProductSpecs.priceGreaterThanOrEq(min));
+        if (min.isPresent()) {
+            spec = spec.and(ProductSpecs.priceGreaterThanOrEq(min.get()));
             filters.append("&min=" + min);
         }
-        if (max != null) {
-            spec = spec.and(ProductSpecs.priceLesserThanOrEq(max));
+        if (max.isPresent) {
+            spec = spec.and(ProductSpecs.priceLesserThanOrEq(max.get()));
             filters.append("&max=" + max);
         }
 
