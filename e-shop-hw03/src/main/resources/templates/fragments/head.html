@@ -1,0 +1,95 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <title>EShop application</title>
+    <style>
+        .navbar-brand {
+            display:block;
+            margin: 0 auto;
+        }
+        .form-select {
+            height: 38px;
+        }
+        .row{
+            justify-content: center
+        }
+    </style>
+
+</head>
+
+    <nav th:fragment="logo" class="navbar fixed-to navbar-light bg-light">
+
+        <p class="container">
+            <a class="navbar-brand" href="/shop">
+                <img src="pics/logo.png" alt="logo">
+            </a>
+        </p>
+    </nav>
+
+<nav th:fragment="navbar-main" class="navbar navbar-expand-lg navbar-light" style="background-color: #ffdab9;">
+    <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/(size=${param.size})}">Все товары</a>
+            </li>
+
+            <li class="nav-item" th:each="brand : ${brands}">
+                <a class="nav-link" th:href="@{/(size=${param.size},
+                            nameFilter=${param.nameFilter},
+                            minFilter=${param.minFilter},
+                            maxFilter=${param.maxFilter},
+                            brand = ${brand.id})}" th:text="${brand.name}">
+                </a>
+            </li>
+        </ul>
+
+        <a sec:authorize="isAnonymous()" class="navbar-text" th:href="@{/login}">Вход</a>
+        <a sec:authorize="isAnonymous()" class="navbar-text">&nbsp/&nbsp</a>
+        <a sec:authorize="isAnonymous()" class="navbar-text" th:href="@{/register}">Регистрация</a>
+
+        <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0">
+                Logout <span sec:authentication="principal.username"></span>
+            </button>
+        </form>
+    </div>
+    </div>
+</nav>
+
+<nav th:fragment="navbar-admin" class="navbar navbar-expand-lg navbar-light" style="background-color: #ffdab9;">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/product}">Управление товарами</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/user}">Управление пользователями</a>
+            </li>
+        </ul>
+
+        <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0">
+                Logout <span sec:authentication="principal.username"></span>
+            </button>
+        </form>
+    </div>
+</nav>
+
+</html>
