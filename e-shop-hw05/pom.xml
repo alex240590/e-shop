@@ -145,6 +145,12 @@
             <version>1.7.26</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -160,7 +166,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.1</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/eshop-db?serverTimezone=Europe/Moscow</url>
+                    <url>jdbc:mysql://localhost:3306/eshop-db</url>
                     <user>root</user>
                     <password>root</password>
                     <schemas>
