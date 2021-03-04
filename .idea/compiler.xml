@@ -7,14 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="geekspring" />
+        <module name="e-shop" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="e-shop" target="11" />
       <module name="geekspring" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="e-shop" options="-parameters" />
       <module name="geekspring" options="-parameters" />
     </option>
   </component>
